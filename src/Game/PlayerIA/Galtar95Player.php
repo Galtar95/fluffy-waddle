@@ -44,7 +44,7 @@ class Galtar95Player extends Player
         if ($this->result->getNbRound() == 0)
             return 'foe';
         if (!in_array('foe',  $this->result->getChoicesFor($this->opponentSide)))
-            return 'foe';
+            return 'friend';
         if (!in_array('friend',  $this->result->getChoicesFor($this->opponentSide)))
             return 'foe';
         $friend = 0;
@@ -58,8 +58,12 @@ class Galtar95Player extends Player
         }
         if ($friend >= $foe)
             return 'foe';
-        else
+        else {
+            if ($this->result->getLastChoiceFor($this->opponentSide) == 'friend') {
+                return 'foe';
+            }
             return 'friend';
+        }
     }
  
 };
