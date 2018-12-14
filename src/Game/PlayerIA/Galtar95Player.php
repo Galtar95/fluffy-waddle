@@ -40,12 +40,16 @@ class Galtar95Player extends Player
         // -------------------------------------    -----------------------------------------------------
         // How can i display the result of each round ? $this->prettyDisplay()
         // -------------------------------------    -----------------------------------------------------
- 
-        if (!$this->result->getLastChoiceFor($this->mySide))
+
+        if (!$this->result->getLastChoiceFor($this->opponentSide))
             return 'foe';
         if (!in_array('foe', $this->result->getChoicesFor($this->opponentSide)))
             return 'friend';
         if (!in_array('friend', $this->result->getChoicesFor($this->opponentSide)))
+            return 'foe';
+        if (!in_array('foe', $this->result->getChoicesFor($this->mySide)))
+            return 'friend';
+        if (!in_array('friend', $this->result->getChoicesFor($this->mySide)))
             return 'foe';
         else
             return $this->result->getLastChoiceFor($this->opponentSide);
