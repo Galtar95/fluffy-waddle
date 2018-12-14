@@ -47,6 +47,10 @@ class Galtar95Player extends Player
             return 'friend';
         if (!in_array('friend',  $this->result->getChoicesFor($this->opponentSide)))
             return 'foe';
+        $dream_team = array('PacoTheGreat', 'Felixdupriez', 'Shiinsekai', 'GHope', 'Christaupher', 'Benli06', 'Etienneelg');
+        $name = $this->result->getStatsFor($this->opponentSide)['name'];
+        if (in_array($name, $dream_team))
+            return parent::friendChoice();
         $friend = 0;
         $foe = 0;
         $all = $this->result->getChoicesFor($this->opponentSide);
