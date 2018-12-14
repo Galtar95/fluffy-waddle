@@ -42,11 +42,11 @@ class Galtar95Player extends Player
         // -------------------------------------    -----------------------------------------------------
 
         if ($this->result->getNbRound() == 0)
-            return 'foe';
-        if (!in_array('foe',  $this->result->getChoicesFor($this->opponentSide)))
-            return 'friend';
-        if (!in_array('friend',  $this->result->getChoicesFor($this->opponentSide)))
-            return 'foe';
+            return parent::foeChoice();
+        if (!in_array(parent::foeChoice(),  $this->result->getChoicesFor($this->opponentSide)))
+            return parent::friendChoice();
+        if (!in_array(parent::friendChoice(),  $this->result->getChoicesFor($this->opponentSide)))
+            return parent::foeChoice();
         $dream_team = array('PacoTheGreat', 'Felixdupriez', 'Shiinsekai', 'GHope', 'Christaupher', 'Benli06', 'Etienneelg', 'Sky555v');
         $name = $this->result->getStatsFor($this->opponentSide)['name'];
         if (in_array($name, $dream_team))
@@ -55,18 +55,18 @@ class Galtar95Player extends Player
         $foe = 0;
         $all = $this->result->getChoicesFor($this->opponentSide);
         for ($i = 0; $i < count($all); $i++) {
-            if ($all[$i] == 'friend')
+            if ($all[$i] == parent::friendChoice())
                 $friend++;
             else
                 $foe++;
         }
         if ($friend >= $foe)
-            return 'foe';
+            return parent::foeChoice();
         else {
-            if ($this->result->getLastChoiceFor($this->opponentSide) == 'friend') {
-                return 'foe';
+            if ($this->result->getLastChoiceFor($this->opponentSide) == parent::friendChoice()) {
+                return parent::foeChoice();
             }
-            return 'friend';
+            return parent::friendChoice();
         }
     }
  
